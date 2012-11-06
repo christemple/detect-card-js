@@ -1,7 +1,8 @@
 source :rubygems
 
-group :test do
-  gem 'rake'
-  gem 'cucumber'
-  gem 'watir-webdriver'
-end
+gem 'rake'
+gem 'cucumber'
+gem 'watir-webdriver'
+gem 'rest-client'
+gem 'rspec'
+
