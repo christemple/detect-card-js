@@ -5,6 +5,13 @@
         <script type="text/javascript" src="lib/detect-card.js" ></script>
     </head>
     <body>
-        Hello there you crazy fool!
+        <label for="card" >Card number:</label>
+        <input id="card" type="text">
     </body>
+
+    <script type="text/javascript">
+        $(function(){
+            $("#card").focus().detectCard({debug: true});
+        });
+    </script>
 </html>
