@@ -25,10 +25,12 @@ $.fn.extend
           detected_card_type = 'visa' if card_number.match /^4/
           detected_card_type = 'mastercard' if card_number.match /^5[1-5]/
 
-        $(@).data 'card', detected_card_type
-        $(".card.#{current_card_type}").text(detected_card_type)
-        current_card_type = detected_card_type
-        log "Current card type: #{current_card_type}"
+        if detected_card_type isnt current_card_type
+          $(@).data 'card', detected_card_type
+          $(".card.#{current_card_type}").removeClass(current_card_type).addClass(detected_card_type)
+          $(".card.#{detected_card_type}").text detected_card_type
+          current_card_type = detected_card_type
+          log "Current card type: #{current_card_type}"
 
       remove_spaces_from = (value)->
         value.replace /\s/g, ''

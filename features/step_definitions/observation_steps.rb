@@ -32,3 +32,7 @@ end
 Then /^I should see '(.*)'$/ do |text|
   @browser.text.should include text
 end
+
+Then /^I should see the card type container has class '(.*)'$/ do |card_type|
+  @browser.span(:class, 'card').attribute_value("class").should include card_type
+end

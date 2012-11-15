@@ -35,7 +35,23 @@ Feature: Auto-detect a users credit/debit card type as they are entering it and 
     Given I have yet to enter my card details
     Then I should see an area where my card type will be detected
 
+
   Scenario: User can see that their credit/debit card is auto detected
     Given I enter Card number '4751'
     Then I should see 'visa'
+
+#  Scenario: User who has not entered their card details should not see that 'none' was detected
+
+  Scenario: Developer should see that the card span tag updates its class with the new card type
+    Given I enter Card number '4'
+    Then I should see the card type container has class 'visa'
+    When I hit the backspace key on Card number
+    Then I should see the card type container has class 'none'
+
+
+  Scenario: User can see their detected card update as soon as possible when they use the delete keys
+    Given I enter Card number '4'
+    Then I should see 'visa'
+    When I hit the backspace key on Card number
+    Then I should see 'none'
 
