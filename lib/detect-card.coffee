@@ -1,6 +1,11 @@
 $ = jQuery
 
 $.fn.extend
+
+  replaceClass: (find, replace)->
+    return @each ()->
+      $(@).removeClass(find).addClass(replace) if $(@).hasClass find
+
   detectCard: (options) ->
     settings =
       debug: false
@@ -18,7 +23,7 @@ $.fn.extend
 
       $(@).on 'keyup', (e)->
         detected_card_type = 'none'
-        card_number = remove_spaces_from $(@).val()
+        card_number = get_card_number_from $(@).val()
 
         if is_a_number card_number
           log "It's valid credit/debit card number"
@@ -27,10 +32,13 @@ $.fn.extend
 
         if detected_card_type isnt current_card_type
           $(@).data 'card', detected_card_type
-          $(".card.#{current_card_type}").removeClass(current_card_type).addClass(detected_card_type)
+          $(".card.#{current_card_type}").replaceClass current_card_type, detected_card_type
           $(".card.#{detected_card_type}").text detected_card_type
           current_card_type = detected_card_type
           log "Current card type: #{current_card_type}"
+
+      get_card_number_from = (card_input)->
+        remove_spaces_from card_input
 
       remove_spaces_from = (value)->
         value.replace /\s/g, ''
