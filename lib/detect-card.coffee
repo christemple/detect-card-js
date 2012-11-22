@@ -2,10 +2,6 @@ $ = jQuery
 
 $.fn.extend
 
-  replaceClass: (find, replace)->
-    return @each ()->
-      $(@).removeClass(find).addClass(replace) if $(@).hasClass find
-
   detectCard: (options) ->
     settings =
       debug: false
@@ -31,11 +27,20 @@ $.fn.extend
           detected_card_type = 'mastercard' if card_number.match /^5[1-5]/
 
         if detected_card_type isnt current_card_type
-          $(@).data 'card', detected_card_type
-          $(".card.#{current_card_type}").replaceClass current_card_type, detected_card_type
-          $(".card.#{detected_card_type}").text detected_card_type
+          update_card_type(@, detected_card_type, current_card_type)
           current_card_type = detected_card_type
           log "Current card type: #{current_card_type}"
+
+      update_card_type = (card_element, detected_type, current_type)->
+        $(card_element).data 'card', detected_type
+        $(".card.#{current_type}").removeClass(current_type).addClass(detected_type)
+        show_card_type_using detected_type
+
+      show_card_type_using = (type)->
+        $(".card.#{type}").text get_card_type_to_show(type)
+
+      get_card_type_to_show = (card_type)->
+        if card_type isnt 'none' then card_type else ''
 
       get_card_number_from = (card_input)->
         remove_spaces_from card_input
