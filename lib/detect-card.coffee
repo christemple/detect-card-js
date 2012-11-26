@@ -41,7 +41,7 @@ $.fn.extend
 
       update_type: ->
         $(@element).data 'card', @detected_type
-        $(".card.#{@type}").removeClass(@type).addClass(@detected_type)
+        $(@element).next('span.card').removeClass(@type).addClass(@detected_type)
         log "Changed card type from '#{@type}' to '#{@detected_type}'"
         @type = @detected_type
 
