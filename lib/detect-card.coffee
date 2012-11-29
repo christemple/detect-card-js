@@ -5,6 +5,7 @@ $.fn.extend
   detectCard: (options) ->
     settings =
       debug: false
+      preventDefault: false
 
     settings = $.extend settings, options
 
@@ -23,7 +24,7 @@ $.fn.extend
         $(@element).after "<span class=\"card none\"/>"
 
       type_has_changed: ->
-         @type isnt @detected_type
+        @type isnt @detected_type
 
       detect_type: ->
         @detected_type = @get_detected_type()
@@ -78,7 +79,7 @@ $.fn.extend
         if card.type_has_changed()
           $(@).trigger 'cardChanged', card.detected_type
           card.update_type()
-          card.display_type()
+          card.display_type() unless settings.preventDefault
 
 
       get_card_number_from = (card_input)->
