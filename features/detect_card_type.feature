@@ -1,13 +1,7 @@
 Feature: Auto-detect a users credit/debit card type as they are entering it and provide feedback on what their card type is
 
-  Scenario: Developer has added JQuery
-    Given I have included the JQuery script
-    Then I should see that JQuery is available
-
-
-  Scenario: Developer has correctly extended the input element with the card detection plugin
-    Given I have included the card detection plugin script
-    Then I should see that JQuery has been extended with a 'detectCard' method
+  Background: Attach the detect card plugin to the card number input
+    Given I have added the detect card plugin
 
 
   Scenario: User enters their Visa card details and has their card detected as a Visa
@@ -111,8 +105,10 @@ Feature: Auto-detect a users credit/debit card type as they are entering it and 
     And I should see the card type container is empty
 
 
-  Scenario: Use the developers placeholder for displaying what card is detected if they already have one
-    Given I have created already created a div placeholder for the detected card type
-    When I enter Card number '4'
-    Then I should see that my div placeholder contains 'Visa'
-    And I should not see the plugins default span placeholder
+  Scenario: User enters a valid number that does not match any card type
+    Given I enter Card number '5'
+    Then my card type should be 'none'
+    When I enter Card number '55'
+    Then my card type should be 'mastercard'
+
+

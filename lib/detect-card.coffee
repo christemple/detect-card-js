@@ -5,6 +5,7 @@ $.fn.extend
   detectCard: (options) ->
     settings =
       debug: false
+      klass: 'card'
 
     settings = $.extend settings, options
 
@@ -16,15 +17,15 @@ $.fn.extend
       detected_type: ''
       number: ''
 
-      constructor: (@element)->
+      constructor: (@element, @klass)->
 
       setup_elements: ->
         unless @placeholder_exists()
           $(@element).data 'card', 'none'
-          $(@element).after "<span class=\"card none\"/>"
+          $(@element).after "<span class=\"#{@klass} none\"/>"
 
       placeholder_exists: ->
-        $('.card')?
+        $(".#{@klass}").length isnt 0
 
       type_has_changed: ->
         @type isnt @detected_type
@@ -46,18 +47,19 @@ $.fn.extend
         else if @number.match /^6(?:011|5)/       then 'discover'
         else if @number.match /^(?:2131|1800|35)/ then 'jcb'
         else if @number.match /^3(?:0[0-5]|[68])/ then 'diners club'
+        else 'none'
 
       is_a_valid_number: ->
         @number isnt "" and not isNaN @number
 
       update_type: ->
         $(@element).data 'card', @detected_type
-        $('.card').removeClass(@type).addClass(@detected_type) unless settings.preventDefault
+        $(".#{@klass}").removeClass(@type).addClass(@detected_type) unless settings.preventDefault
         log "Changed card type from '#{@type}' to '#{@detected_type}'"
         @type = @detected_type
 
       display_type: ->
-        $(".card.#{@type}").text @get_card_type_to_display()
+        $(".#{@klass}.#{@type}").text @get_card_type_to_display()
 
       get_card_type_to_display: ->
         switch @type
@@ -72,7 +74,7 @@ $.fn.extend
 
     return @each ()->
 
-      card = new Card @
+      card = new Card @, settings.klass
       card.setup_elements()
 
       $(@).on 'keyup', (e)->
