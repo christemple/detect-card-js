@@ -5,7 +5,6 @@ $.fn.extend
   detectCard: (options) ->
     settings =
       debug: false
-      preventDefault: false
 
     settings = $.extend settings, options
 
@@ -79,7 +78,7 @@ $.fn.extend
         if card.type_has_changed()
           $(@).trigger 'cardChanged', card.detected_type
           card.update_type()
-          card.display_type() unless settings.preventDefault
+          card.display_type()
 
 
       get_card_number_from = (card_input)->
