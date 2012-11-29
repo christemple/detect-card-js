@@ -62,6 +62,7 @@ $.fn.extend
         card.detect_type()
 
         if card.type_has_changed()
+          $(@).trigger 'cardChanged', card.detected_type
           card.update_type()
           card.display_type()
 
