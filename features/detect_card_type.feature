@@ -10,14 +10,76 @@ Feature: Auto-detect a users credit/debit card type as they are entering it and 
     Then I should see that JQuery has been extended with a 'detectCard' method
 
 
-  Scenario Outline: User enters their card details and has their card detected
-    Given I enter Card number '<card_number>'
-    Then my card type should be '<card_type>'
-  Examples:
-    | card_type  | card_number      |
-    | visa       | 4751000011112222 |
-    | mastercard | 5499000011112222 |
+  Scenario: User enters their Visa card details and has their card detected as a Visa
+    Given I enter Card number '4751000011112222'
+    Then my card type should be 'visa'
 
+
+  Scenario Outline: User enters their MasterCard card details and has their card detected as a MasterCard
+    Given I enter Card number '<card_number>'
+    Then my card type should be 'mastercard'
+  Examples:
+    | card_number      |
+    | 5199000011112222 |
+    | 5299000011112222 |
+    | 5399000011112222 |
+    | 5499000011112222 |
+    | 5599000011112222 |
+
+  Scenario Outline: User enters their American Express card details and has their card detected as an American Express
+    Given I enter Card number '<card_number>'
+    Then my card type should be 'american_express'
+  Examples:
+    | card_number     |
+    | 347700001111222 |
+    | 357700001111222 |
+    | 367700001111222 |
+    | 377700001111222 |
+
+
+  Scenario Outline: User enters their Discover card details and has their card detected as a Discover card
+    Given I enter Card number '<card_number>'
+    Then my card type should be 'discover'
+  Examples:
+    | card_number      |
+    | 6522000011112222 |
+    | 6011000011112222 |
+
+
+  Scenario Outline: User enters their JCB card details and has their card detected as a JCB card
+    Given I enter Card number '<card_number>'
+    Then my card type should be 'jcb'
+  Examples:
+    | card_number      |
+    | 213100001111222  |
+    | 180000001111222  |
+    | 3500000011112222 |
+
+  Scenario Outline: User enters their Diners Club card details and has their card detected as a Diners Club card
+    Given I enter Card number '<card_number>'
+    Then my card type should be 'diners_club'
+  Examples:
+    | card_number    |
+    | 30010000111122 |
+    | 30110000111122 |
+    | 30310000111122 |
+    | 30410000111122 |
+    | 30510000111122 |
+    | 36990000111122 |
+    | 38990000111122 |
+
+
+  Scenario Outline: User can see that their credit/debit card is auto detected
+    Given I enter Card number '<card_number>'
+    Then I should see '<card_type>'
+  Examples:
+    | card_type        | card_number      |
+    | Visa             | 4751000011112222 |
+    | MasterCard       | 5499000011112222 |
+    | American Express | 377700001111222  |
+    | Discover         | 6011000011112222 |
+    | JCB              | 213100001111222  |
+    | Diners Club      | 30510000111122   |
 
   Scenario: User enters their card number with spaces still has their card type detected
     Given I enter Card number '4751 0000 1111 2222'
@@ -36,11 +98,6 @@ Feature: Auto-detect a users credit/debit card type as they are entering it and 
     Then I should see an area where my card type will be detected
 
 
-  Scenario: User can see that their credit/debit card is auto detected
-    Given I enter Card number '4751'
-    Then I should see 'visa'
-
-
   Scenario: Developer should see that the card span tag updates its class with the new card type
     Given I enter Card number '4'
     Then I should see the card type container has class 'visa'
@@ -54,4 +111,3 @@ Feature: Auto-detect a users credit/debit card type as they are entering it and 
     When I hit the backspace key on Card number
     Then I should not see 'visa'
     And I should see the card type container is empty
-

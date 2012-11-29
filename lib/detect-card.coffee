@@ -33,15 +33,22 @@ $.fn.extend
       get_detected_type: ->
         if @is_a_valid_number()
           log "Card number '#{@number}' is valid"
-          if @number.match /^4/ then 'visa'
-          else if @number.match /^5[1-5]/ then 'mastercard'
+          @get_type().replace " ", "_"
+
+      get_type: ->
+        if @number.match /^4/ then 'visa'
+        else if @number.match /^5[1-5]/           then 'mastercard'
+        else if @number.match /^3[47]/            then 'american express'
+        else if @number.match /^6(?:011|5)/       then 'discover'
+        else if @number.match /^(?:2131|1800|35)/ then 'jcb'
+        else if @number.match /^3(?:0[0-5]|[68])/ then 'diners club'
 
       is_a_valid_number: ->
         @number isnt "" and not isNaN @number
 
       update_type: ->
         $(@element).data 'card', @detected_type
-        $(@element).next('span.card').removeClass(@type).addClass(@detected_type)
+        $(@element).next('span.card').removeClass(@type).addClass(@detected_type) unless settings.preventDefault
         log "Changed card type from '#{@type}' to '#{@detected_type}'"
         @type = @detected_type
 
@@ -49,7 +56,14 @@ $.fn.extend
         $(".card.#{@type}").text @get_card_type_to_display()
 
       get_card_type_to_display: ->
-        if @type isnt 'none' then @type else ''
+        switch @type
+          when "visa"             then "Visa"
+          when 'mastercard'       then "MasterCard"
+          when 'american_express' then "American Express"
+          when 'discover'         then "Discover"
+          when 'jcb'              then "JCB"
+          when 'diners_club'      then "Diners Club"
+          when 'none'             then ""
 
 
     return @each ()->
