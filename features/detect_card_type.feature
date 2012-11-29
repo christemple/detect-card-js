@@ -32,8 +32,6 @@ Feature: Auto-detect a users credit/debit card type as they are entering it and 
   Examples:
     | card_number     |
     | 347700001111222 |
-    | 357700001111222 |
-    | 367700001111222 |
     | 377700001111222 |
 
 
@@ -107,7 +105,7 @@ Feature: Auto-detect a users credit/debit card type as they are entering it and 
 
   Scenario: User can see their detected card update as soon as possible when they use the delete keys
     Given I enter Card number '4'
-    Then I should see 'visa'
+    Then I should see 'Visa'
     When I hit the backspace key on Card number
-    Then I should not see 'visa'
+    Then I should not see 'Visa'
     And I should see the card type container is empty
