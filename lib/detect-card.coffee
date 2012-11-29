@@ -19,8 +19,12 @@ $.fn.extend
       constructor: (@element)->
 
       setup_elements: ->
-        $(@element).data 'card', 'none'
-        $(@element).after "<span class=\"card none\"/>"
+        unless @placeholder_exists()
+          $(@element).data 'card', 'none'
+          $(@element).after "<span class=\"card none\"/>"
+
+      placeholder_exists: ->
+        $('.card')?
 
       type_has_changed: ->
         @type isnt @detected_type
@@ -36,7 +40,7 @@ $.fn.extend
           @get_type().replace " ", "_"
 
       get_type: ->
-        if @number.match /^4/ then 'visa'
+        if      @number.match /^4/                then 'visa'
         else if @number.match /^5[1-5]/           then 'mastercard'
         else if @number.match /^3[47]/            then 'american express'
         else if @number.match /^6(?:011|5)/       then 'discover'
@@ -48,7 +52,7 @@ $.fn.extend
 
       update_type: ->
         $(@element).data 'card', @detected_type
-        $(@element).next('span.card').removeClass(@type).addClass(@detected_type) unless settings.preventDefault
+        $('.card').removeClass(@type).addClass(@detected_type) unless settings.preventDefault
         log "Changed card type from '#{@type}' to '#{@detected_type}'"
         @type = @detected_type
 

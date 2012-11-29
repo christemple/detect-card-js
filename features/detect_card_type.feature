@@ -109,3 +109,10 @@ Feature: Auto-detect a users credit/debit card type as they are entering it and 
     When I hit the backspace key on Card number
     Then I should not see 'Visa'
     And I should see the card type container is empty
+
+
+  Scenario: Use the developers placeholder for displaying what card is detected if they already have one
+    Given I have created already created a div placeholder for the detected card type
+    When I enter Card number '4'
+    Then I should see that my div placeholder contains 'Visa'
+    And I should not see the plugins default span placeholder

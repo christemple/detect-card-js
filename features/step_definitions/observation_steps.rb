@@ -44,3 +44,11 @@ end
 When /^I should see the card type container is empty$/ do
   @browser.span(:class, 'card').text.should be_empty
 end
+
+Then /^I should see that my div placeholder contains '(.*)'$/ do |text|
+  @browser.div(:class, 'card').text.should include text
+end
+
+When /^I should not see the plugins default span placeholder$/ do
+  @browser.span(:class, 'card').exists?.should be_false
+end
