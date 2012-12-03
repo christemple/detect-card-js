@@ -6,6 +6,7 @@ $.fn.extend
     settings =
       debug: false
       klass: 'card'
+      showText: false
 
     settings = $.extend settings, options
 
@@ -54,7 +55,7 @@ $.fn.extend
 
       update_type: ->
         $(@element).data 'card', @detected_type
-        $(".#{@klass}").removeClass(@type).addClass(@detected_type) unless settings.preventDefault
+        $(".#{@klass}").removeClass(@type).addClass(@detected_type)
         log "Changed card type from '#{@type}' to '#{@detected_type}'"
         @type = @detected_type
 
@@ -84,7 +85,7 @@ $.fn.extend
         if card.type_has_changed()
           $(@).trigger 'cardChanged', card.detected_type
           card.update_type()
-          card.display_type()
+          card.display_type() if settings.showText
 
 
       get_card_number_from = (card_input)->

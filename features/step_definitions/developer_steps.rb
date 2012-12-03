@@ -43,3 +43,9 @@ end
 Then /^I should see that my custom '(.*)' placeholder contains '(.*)'$/ do |klass,text|
   @browser.div(:class, klass).text.should include text
 end
+
+Given /^I have added the plugin with the option to see the card type text$/ do
+  @browser.execute_script(<<-JS)
+    $('#card').detectCard({debug: true, showText: true})
+  JS
+end

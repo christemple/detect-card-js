@@ -26,3 +26,19 @@ Feature: As a developer I can customise the detect card plugin
     When I enter Card number '4'
     Then I should see that my custom 'card_type' placeholder contains 'Visa'
     And I should not see the plugins default span placeholder
+
+
+  Scenario Outline: Developer can choose to display the card type as text in their placeholder
+    Given I have added the plugin with the option to see the card type text
+    When I enter Card number '<card_number>'
+    Then I should see '<card_type>'
+  Examples:
+  | card_type        | card_number      |
+  | Visa             | 4751000011112222 |
+  | MasterCard       | 5499000011112222 |
+  | American Express | 377700001111222  |
+  | Discover         | 6011000011112222 |
+  | JCB              | 213100001111222  |
+  | Diners Club      | 30510000111122   |
+
+

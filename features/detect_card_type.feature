@@ -61,9 +61,9 @@ Feature: Auto-detect a users credit/debit card type as they are entering it and 
     | 38990000111122 |
 
 
-  Scenario Outline: User can see that their credit/debit card is auto detected
+  Scenario Outline: User will not see their detected credit/debit card if it has not been configured to do so
     Given I enter Card number '<card_number>'
-    Then I should see '<card_type>'
+    Then I should not see '<card_type>'
   Examples:
     | card_type        | card_number      |
     | Visa             | 4751000011112222 |
