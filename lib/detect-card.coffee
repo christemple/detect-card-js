@@ -85,8 +85,8 @@ $.fn.extend
         card.detect_type()
 
         if card.type_has_changed()
-          $(@).trigger 'cardChanged', card.get_card_type_to_display(), card.detected_type
           card.update_type()
+          $(@).trigger 'cardChanged', card.get_card_type_to_display()
           card.display_type() if settings.showText
 
 
