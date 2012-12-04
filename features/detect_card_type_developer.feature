@@ -33,12 +33,13 @@ Feature: As a developer I can customise the detect card plugin
     When I enter Card number '<card_number>'
     Then I should see '<card_type>'
   Examples:
-  | card_type        | card_number      |
-  | Visa             | 4751000011112222 |
-  | MasterCard       | 5499000011112222 |
-  | American Express | 377700001111222  |
-  | Discover         | 6011000011112222 |
-  | JCB              | 213100001111222  |
-  | Diners Club      | 30510000111122   |
+    | card_type        | card_number      |
+    | Visa             | 4751000011112222 |
+    | MasterCard       | 5499000011112222 |
+    | Maestro          | 6763000011112222 |
+    | American Express | 377700001111222  |
+    | Discover         | 6011000011112222 |
+    | JCB              | 213100001111222  |
+    | Diners Club      | 30510000111122   |
 
 

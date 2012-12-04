@@ -20,6 +20,22 @@ Feature: Auto-detect a users credit/debit card type as they are entering it and 
     | 5499000011112222 |
     | 5599000011112222 |
 
+  Scenario Outline: User enters their Maestro card details and has their card detected as a Maestro
+    Given I enter Card number '<card_number>'
+    Then my card type should be 'maestro'
+  Examples:
+    | card_number      |
+    | 5018000011112222 |
+    | 5020000011112222 |
+    | 5038000011112222 |
+    | 5893000011112222 |
+    | 6304000011112222 |
+    | 6761000011112222 |
+    | 6762000011112222 |
+    | 6763000011112222 |
+    | 0604000011112222 |
+
+
   Scenario Outline: User enters their American Express card details and has their card detected as an American Express
     Given I enter Card number '<card_number>'
     Then my card type should be 'american_express'
@@ -68,6 +84,7 @@ Feature: Auto-detect a users credit/debit card type as they are entering it and 
     | card_type        | card_number      |
     | Visa             | 4751000011112222 |
     | MasterCard       | 5499000011112222 |
+    | Maestro          | 6763000011112222 |
     | American Express | 377700001111222  |
     | Discover         | 6011000011112222 |
     | JCB              | 213100001111222  |

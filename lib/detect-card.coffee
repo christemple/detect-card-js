@@ -42,12 +42,13 @@ $.fn.extend
           @get_type().replace " ", "_"
 
       get_type: ->
-        if      @number.match /^4/                then 'visa'
-        else if @number.match /^5[1-5]/           then 'mastercard'
-        else if @number.match /^3[47]/            then 'american express'
-        else if @number.match /^6(?:011|5)/       then 'discover'
-        else if @number.match /^(?:2131|1800|35)/ then 'jcb'
-        else if @number.match /^3(?:0[0-5]|[68])/ then 'diners club'
+        if      @number.match /^4/                  then 'visa'
+        else if @number.match /^5[1-5]/             then 'mastercard'
+        else if @number.match /^3[47]/              then 'american express'
+        else if @number.match /^6(?:011|5)/         then 'discover'
+        else if @number.match /^(?:2131|1800|35)/   then 'jcb'
+        else if @number.match /^3(?:0[0-5]|[68])/   then 'diners club'
+        else if @number.match /^5018|5020|5038|5893|6304|67(59|61|62|63)|0604/ then 'maestro'
         else 'none'
 
       is_a_valid_number: ->
@@ -66,6 +67,7 @@ $.fn.extend
         switch @type
           when "visa"             then "Visa"
           when 'mastercard'       then "MasterCard"
+          when 'maestro'          then "Maestro"
           when 'american_express' then "American Express"
           when 'discover'         then "Discover"
           when 'jcb'              then "JCB"
@@ -83,7 +85,7 @@ $.fn.extend
         card.detect_type()
 
         if card.type_has_changed()
-          $(@).trigger 'cardChanged', card.detected_type
+          $(@).trigger 'cardChanged', card.get_card_type_to_display(), card.detected_type
           card.update_type()
           card.display_type() if settings.showText
 
