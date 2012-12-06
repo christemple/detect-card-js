@@ -1,5 +1,7 @@
 *{ font-family: 'Arial'; }
 
+.example { margin-bottom: 20px; }
+
 .card {
     width: 53px;
     height: 32px;
