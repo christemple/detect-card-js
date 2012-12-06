@@ -1,0 +1,39 @@
+*{ font-family: 'Arial'; }
+
+.card {
+    width: 53px;
+    height: 32px;
+    margin-left: 5px;;
+    display: inline-block;
+    vertical-align: middle;
+    background: url('../images/cards_small.png') no-repeat 53px 0px;
+}
+
+.card.visa              { background-position:    0px 0px; }
+.card.mastercard        { background-position:  -53px 0px; }
+.card.maestro           { background-position: -106px 0px; }
+.card.american_express  { background-position: -159px 0px; }
+.card.discover          { background-position: -212px 0px; }
+.card.jcb               { background-position: -265px 0px; }
+.card.diners_club       { background-position: -318px 0px; }
+
+.card_placeholder {
+    width: 73px;
+    height: 44px;
+    margin-left: 5px;;
+    display: inline-block;
+    vertical-align: middle;
+    background: url('../images/cards.png') no-repeat 73px 0px;
+}
+
+.card_placeholder.visa              { background-position:    0px 0px; }
+.card_placeholder.mastercard        { background-position:  -73px 0px; }
+.card_placeholder.maestro           { background-position: -146px 0px; }
+.card_placeholder.american_express  { background-position: -219px 0px; }
+.card_placeholder.discover          { background-position: -292px 0px; }
+.card_placeholder.jcb               { background-position: -365px 0px; }
+.card_placeholder.diners_club       { background-position: -438px 0px; }
+
+
+
+.credit { margin-top:30px; font: 90% italic; }
