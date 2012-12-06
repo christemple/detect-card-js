@@ -40,11 +40,38 @@
 
         <p>Below are a few examples of how to use the plugin, as well as a demonstration of its features.</p>
 
-        <h3>Examples</h3>
+        <hr>
+
+        <div class="example">
+            <h4>Typical</h4>
+            <label for="card">Card number:</label>
+            <input id="card" type="text">
+        </div>
+
+        <div class="example">
+            <h4>Using custom placeholder</h4>
+            <label for="card_custom">Card number:</label>
+            <input id="card_custom" type="text">
+        </div>
+
+        <div class="example">
+            <h4>Displaying card types name</h4>
+            <label for="card_name">Card number:</label>
+            <input id="card_name" type="text">
+        </div>
+
+        <div class="example">
+            <h4>Parameters passed back by the cardChanged event</h4>
+            <label for="card_parameters">Card number:</label>
+            <input id="card_parameters" type="text">
+
+            <div>Using event callback params 'cardChanged', function (e, card_name)</div>
+            <div class="callback_example"></div>
+        </div>
 
         <hr>
 
-        <p>Also, here's are some example card numbers to try it out with</p>
+        <h3>Example card numbers to try it out with</h3>
         <table>
             <tr>
                 <td>Visa</td>
@@ -75,35 +102,6 @@
                 <td>38990000111122</td>
             </tr>
         </table>
-
-        <hr>
-
-        <div class="example">
-            <h4>Typical</h4>
-            <label for="card">Card number:</label>
-            <input id="card" type="text">
-        </div>
-
-        <div class="example">
-            <h4>Using custom placeholder</h4>
-            <label for="card_custom">Card number:</label>
-            <input id="card_custom" type="text">
-        </div>
-
-        <div class="example">
-            <h4>Displaying card types name</h4>
-            <label for="card_name">Card number:</label>
-            <input id="card_name" type="text">
-        </div>
-
-        <div class="example">
-            <h4>Parameters passed back by the cardChanged event</h4>
-            <label for="card_parameters">Card number:</label>
-            <input id="card_parameters" type="text">
-
-            <div>Using event callback params 'cardChanged', function (e, card_name)</div>
-            <div class="callback_example"></div>
-        </div>
 
         <div class="credit">Credit goes to Shopify for supplying the <a
                 href="http://www.shopify.com/blog/6335014-32-free-credit-card-icons">free credit card icons</a></div>
