@@ -1,5 +1,6 @@
 require "rake"
 require 'cucumber/rake/task'
+require "colorize"
 
 Cucumber::Rake::Task.new do |t|
   t.cucumber_opts = %w{--format pretty}
@@ -11,14 +12,35 @@ task :start do
 end
 
 def start_application
+  prompt_to_install_node         unless has_node_installed?
+  prompt_to_install_coffeescript unless has_coffeescript_installed?
+
   stop_application if application_running
 
-  fail "Failed to start node server" unless system "coffee -c lib/detect-card.coffee server.coffee | node server.js &"
   wait_until do
     application_running
   end
 end
 
+def prompt_to_install_node
+  puts "You gotta install Node first dude\n".red.on_light_white <<
+       "https://github.com/joyent/node/wiki/Installation".underline.blue.on_light_white
+  fail "Node not found"
+end
+
+def prompt_to_install_coffeescript
+  puts "You gotta install CoffeeScript first dude\n".red.on_light_white <<
+       "http://coffeescript.org/#installation".underline.blue.on_light_white
+  fail "CoffeeScript not found"
+end
+
+def has_node_installed?
+  not `which node`.empty?
+end
+
+def has_coffeescript_installed?
+  not `which coffee`.empty?
+end
 
 def stop_application
   system "kill -9 #{application_process_id}"
