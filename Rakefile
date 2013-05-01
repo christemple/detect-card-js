@@ -17,7 +17,7 @@ def start_application
 
   stop_application if application_running
 
-  fail "Failed to start Node server" unless system "coffee -c lib/detect-card.coffee server.coffee | node server.js &"
+  fail "Failed to start Node server" unless system "coffee -c server.coffee lib/detect-card.coffee tests/spec/DetectCardSpec.coffee | node server.js &"
   wait_until do
     application_running
   end

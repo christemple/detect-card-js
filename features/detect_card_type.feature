@@ -38,7 +38,7 @@ Feature: Auto-detect a users credit/debit card type as they are entering it and 
 
   Scenario Outline: User enters their American Express card details and has their card detected as an American Express
     Given I enter Card number '<card_number>'
-    Then my card type should be 'american_express'
+    Then my card type should be 'american-express'
   Examples:
     | card_number     |
     | 347700001111222 |
@@ -65,7 +65,7 @@ Feature: Auto-detect a users credit/debit card type as they are entering it and 
 
   Scenario Outline: User enters their Diners Club card details and has their card detected as a Diners Club card
     Given I enter Card number '<card_number>'
-    Then my card type should be 'diners_club'
+    Then my card type should be 'diners-club'
   Examples:
     | card_number    |
     | 30010000111122 |
@@ -77,19 +77,6 @@ Feature: Auto-detect a users credit/debit card type as they are entering it and 
     | 38990000111122 |
 
 
-  Scenario Outline: User will not see their detected credit/debit card if it has not been configured to do so
-    Given I enter Card number '<card_number>'
-    Then I should not see '<card_type>'
-  Examples:
-    | card_type        | card_number      |
-    | Visa             | 4751000011112222 |
-    | MasterCard       | 5499000011112222 |
-    | Maestro          | 6763000011112222 |
-    | American Express | 377700001111222  |
-    | Discover         | 6011000011112222 |
-    | JCB              | 213100001111222  |
-    | Diners Club      | 30510000111122   |
-
   Scenario: User enters their card number with spaces still has their card type detected
     Given I enter Card number '4751 0000 1111 2222'
     Then my card type should be 'visa'
@@ -99,33 +86,18 @@ Feature: Auto-detect a users credit/debit card type as they are entering it and 
     Given I enter Card number '4751'
     Then my card type should be 'visa'
     When I enter Card number '4751a'
-    Then my card type should be 'none'
-
-
-  Scenario: User has area next to their card input to show them what card is detected
-    Given I have yet to enter my card details
-    Then I should see an area where my card type will be detected
-
-
-  Scenario: Developer should see that the card span tag updates its class with the new card type
-    Given I enter Card number '4'
-    Then I should see the card type container has class 'visa'
-    When I hit the backspace key on Card number
-    Then I should see the card type container has class 'none'
+    Then I should not have a card type
 
 
   Scenario: User can see their detected card update as soon as possible when they use the delete keys
     Given I enter Card number '4'
-    Then I should see 'Visa'
+    Then my card type should be 'visa'
     When I hit the backspace key on Card number
-    Then I should not see 'Visa'
-    And I should see the card type container is empty
+    Then I should not have a card type
 
 
   Scenario: User enters a valid number that does not match any card type
     Given I enter Card number '5'
-    Then my card type should be 'none'
+    Then I should not have a card type
     When I enter Card number '55'
     Then my card type should be 'mastercard'
-
-

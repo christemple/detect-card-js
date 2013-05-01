@@ -16,18 +16,18 @@ describe 'DetectCard', ->
     $('#testContainer').children().remove()
 
 
-  it 'should call the cardChanged event if the card type has changed', ->
+  it 'should call the cardChange event if the card type has changed', ->
 
-    spyOnEvent('#card', 'cardChanged');
+    spyOnEvent('#card', 'cardChange');
     enter_visa_number_to $('#card')
-    expect('cardChanged').toHaveBeenTriggeredOn('#card');
+    expect('cardChange').toHaveBeenTriggeredOn('#card');
 
 
   it 'should not call the cardChanged event if the card type has not changed', ->
 
-    spyOnEvent('#card', 'cardChanged');
+    spyOnEvent('#card', 'cardChange');
     enter_visa_number_to $('#card')
-    expect('cardChanged').toHaveBeenTriggeredOn('#card');
+    expect('cardChange').toHaveBeenTriggeredOn('#card');
     jasmine.JQuery.events.cleanUp();
     enter_visa_number_to $('#card')
-    expect('cardChanged').toNotHaveBeenTriggeredOn('#card');
+    expect('cardChange').toNotHaveBeenTriggeredOn('#card');

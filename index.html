@@ -7,11 +7,15 @@
     <body>
         <label for="card" >Card number:</label>
         <input id="card" type="text">
+        <span id="type"></span>
     </body>
 
     <script type="text/javascript">
         $(function(){
             $("#card").focus();
+            $("#card").detectCard().on('cardChange', function(e, card_type){
+                $("span#type").removeClass().addClass("card " + card_type).text(card_type)
+            })
         });
     </script>
 </html>
