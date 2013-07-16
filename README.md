@@ -7,4 +7,4 @@ You can check out a demo here: [Detect card type jquery] [1]
 
 Enjoy
 
-  [1]: http://temple3188.github.com/detect-card-js/        "Detect card type jquery"
+  [1]: http://christemple.github.com/detect-card-js/        "Detect card type jquery"
