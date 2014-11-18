@@ -1,11 +1,9 @@
 require 'watir-webdriver'
 require 'rspec'
 
-Before do
-  @browser = Watir::Browser.new :firefox
-  @browser.goto "http://localhost:1337"
-end
+$browser = Watir::Browser.new :chrome
+$browser.goto "http://localhost:1337"
 
-After do
-  @browser.close
+at_exit do
+  $browser.close
 end

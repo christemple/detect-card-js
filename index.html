@@ -8,13 +8,18 @@
         <label for="card" >Card number:</label>
         <input id="card" type="text">
         <span id="type"></span>
+        <span id="support"></span>
     </body>
 
     <script type="text/javascript">
         $(function(){
             $("#card").focus();
-            $("#card").detectCard().on('cardChange', function(e, card_type){
-                $("span#type").removeClass().addClass("card " + card_type).text(card_type)
+            $("#card").detectCard().on('cardChange', function(e, card){
+                $("span#support").text('');
+                $("span#type").removeClass().addClass("card " + card.type).text(card.type)
+                if (!card.supported) {
+                  $("span#support").text('not supported');
+                }
             })
         });
     </script>

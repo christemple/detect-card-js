@@ -5,6 +5,7 @@ $.fn.extend
   detectCard: (options) ->
     settings =
       debug: false
+      supported: ['visa','mastercard','maestro','american-express','discover','jcb','diners-club']
 
     settings = $.extend settings, options
 
@@ -57,7 +58,8 @@ $.fn.extend
 
         if card.type_has_changed()
           card.update_type()
-          $(@).trigger 'cardChange', card.type
+          is_supported = card.type in settings.supported
+          $(@).trigger 'cardChange', { type: card.type, supported: is_supported }
 
 
       get_card_number_from = (card_input)->
