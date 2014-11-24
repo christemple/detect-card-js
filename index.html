@@ -94,8 +94,8 @@
 
 <script type="text/javascript">
     $(function () {
-        $("#card").detectCard().on('cardChange', function (e, card_type) {
-            $('.card').hide().removeClass().addClass("card " + card_type).fadeIn('fast');
+        $("#card").detectCard().on('cardChange', function (e, card.name) {
+            $('.card').hide().removeClass().addClass("card " + card.name).fadeIn('fast');
         });
     });
 </script>
