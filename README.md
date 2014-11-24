@@ -15,7 +15,7 @@ It's fairly simple:
 $("input#cardNumber").detectCard().on("cardChange", function(e, card) {
 
   // Assuming input of card number: 4111 111 1111 1111
-  console.log(card.name);  // => "visa"
+  console.log(card.type);  // => "visa"
 });
 ```
 
@@ -27,7 +27,7 @@ $("input#cardNumber").detectCard({ supported: ['visa', 'mastercard', 'maestro']}
 $("input#cardNumber").on("cardChange", function(e, card) {
 
   // Assuming input of card number: 4111 111 1111 1111
-  console.log(card.name);      // => "visa"
+  console.log(card.type);      // => "visa"
   console.log(card.supported); // => true
 });
 ```
