@@ -11,6 +11,11 @@
   fs = require('fs');
 
   http.createServer(function(request, response) {
+    if (path.normalize(decodeURI(request.url)) !== decodeURI(request.url)) {
+        response.statusCode = 403;
+        response.end();
+        return;
+    }
     var filename, uri;
     uri = url.parse(request.url).pathname;
     filename = uri === '/' ? 'index.html' : path.join(process.cwd(), uri);
